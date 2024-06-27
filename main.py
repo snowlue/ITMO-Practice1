@@ -18,7 +18,7 @@ def create_dataset(filename: str, dataset_array: list[list]):
 
 env = gym.make('Ant-v4')
 
-num_episodes = int(os.getenv('NUM_EPISODES', 1000))  # variable creates in Dockerfile
+num_episodes = int(os.getenv('NUM_EPISODES', input()))  # variable creates in Dockerfile
 observations, actions = [], []
 
 for episode in range(num_episodes):
