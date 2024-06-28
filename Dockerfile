@@ -1,12 +1,15 @@
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 RUN apt-get update && \
-    pip3 install --upgrade pip
+    python3 -m pip install --upgrade pip
 
-COPY requirements.txt .
-RUN pip3 install -r requirements.txt
+RUN apt-get install libglfw3 -y
 
-ENV NUM_EPISODES=100  # you can set this value in the docker run command
+COPY ./requirements.txt ./
+RUN python3 -m pip install -r requirements.txt -f https://download.pytorch.org/whl/torch_stable.html
+
+# you can set this value in the docker run command
+ENV NUM_EPISODES=100
 
 COPY . /app
 WORKDIR /app
